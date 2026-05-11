@@ -1,3 +1,6 @@
 gradio
+ultralytics
+opencv-python
 pillow
 numpy
+torch
