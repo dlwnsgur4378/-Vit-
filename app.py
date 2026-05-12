@@ -1,26 +1,29 @@
+import os
+os.environ["GRADIO_ANALYTICS_ENABLED"] = "False"
+
 import gradio as gr
 from ultralytics import YOLO
 from PIL import Image
 import numpy as np
 
-# 모델 불러오기
 model = YOLO("best_emotion_model.pt")
 
-# 예측 함수
 def predict(img):
-
     results = model(img)
 
-    # 결과 이미지 생성
-    plotted = results[0].plot()
+    names = results[0].names
+    probs = results[0].probs.data.cpu().numpy()
 
-    return plotted
+    best_idx = np.argmax(probs)
+    emotion = names[best_idx]
+    confidence = probs[best_idx]
 
-# 웹 인터페이스
+    return f"감정: {emotion} ({confidence:.2f})"
+
 demo = gr.Interface(
     fn=predict,
     inputs=gr.Image(type="pil"),
-    outputs=gr.Image(),
+    outputs="text",
     title="강아지 감정 분석 AI"
 )
 
