@@ -1,9 +1,8 @@
-gradio==3.41.2
-fastapi
-uvicorn
+gradio==3.50.2
 ultralytics
 opencv-python-headless
 pillow
 numpy
 torch
 torchvision
+pydub
