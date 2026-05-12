@@ -1,7 +1,6 @@
-gradio==3.50.2
+gradio==4.44.1
 ultralytics
-opencv-python-headless
-pillow
 numpy
 torch
 torchvision
+pillow
